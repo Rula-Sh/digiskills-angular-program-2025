@@ -1,0 +1,58 @@
+<!-- ref: https://www.w3schools.com/css/tryit.asp?filename=trycss_sel_element_element -->
+<!-- ------------------------------------------------ Descendant Combinator ------------------------------------------------ -->
+
+<!doctype html>
+<html>
+  <head>
+    <style>
+      div p {
+        background-color: rgb(255, 255, 200);
+      }
+      /* Q: make Paragraphs 3 color grey*/
+      section p {
+        color: grey;
+      }
+      /* Q: make Paragraph 3.2 color line-through*/
+      section p:nth-child(2) {
+        text-decoration: line-through;
+      }
+      /* Q: make Paragraph 6 size 20px*/
+      .par-6 p {
+        font-size: 20px;
+      }
+      /* Q: make all first paragraph siblings after a div green*/
+      div + p {
+        color: green;
+      }
+      /* Q: make all paragraph siblings after a div italic*/
+      div ~ p {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Descendant Combinator (space)</h2>
+
+    <p>
+      The descendant combinator (space) matches all elements that are
+      descendants (children, grandchildren, etc.) of a specified element.
+    </p>
+    <p>The following example selects all p elements inside div elements:</p>
+
+    <div>
+      <p>Paragraph 1 in the div.</p>
+      <p>Paragraph 2 in the div.</p>
+      <section>
+        <p>Paragraph 3.1 in the div.</p>
+        <p>Paragraph 3.2 in the div.</p>
+      </section>
+    </div>
+
+    <p>Paragraph 4. Not in a div.</p>
+    <p>Paragraph 5. Not in a div.</p>
+
+    <div class="par-6">
+      <p>Paragraph 6. Not in a div.</p>
+    </div>
+  </body>
+</html>
