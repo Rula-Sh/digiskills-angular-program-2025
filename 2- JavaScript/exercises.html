@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Functions</title>
+  </head>
+  <body>
+    <!-- ---------------------------------------------------- Functions ---------------------------------------------------- -->
+    <h1>Welcome to JavaScript</h1>
+    <button onclick="printMessage()">Click Me</button>
+    <div id="message"></div>
+
+    <!-- Create a function that types out the person name, city, and if the person has graduated -->
+    <button onclick="printPersonInfo('Ahmad', 'Amman', true)">Click Me</button>
+    <div id="personInfo"></div>
+  </body>
+
+  <script>
+    // <!-- --------------------------------------------------- Functions --------------------------------------------------- -->
+    var testVar = 200;
+    function showMessage(name, age) {
+      var var1 = 5;
+      let var2 = 10;
+      const var3 = 15;
+      console.log(testVar, "testVar");
+      return name + "is" + age + "years old";
+    }
+
+    console.log(testVar, "testVar1");
+
+    function printMessage() {
+      console.log(showMessage("Sara", 20));
+      document.getElementById("message").innerHTML = showMessage("James", 27);
+    }
+
+    // Create a function that types out the person name, city, and if the person has graduated
+    function printPersonInfo(name, city, isGraduated) {
+      document.getElementById("personInfo").innerHTML =
+        `${name} lives in ${city} and ${isGraduated ? "has graduated." : "did not graduate yet."}`;
+    }
+
+    // <!-- ---------------------------------------------- For, Switch & Date ---------------------------------------------- -->
+    // Q: Write a JS code to print the number of days in the first 3 months of the year. Use a for loop to iterate through numbers Jan to March and a switch statement to print the number of days in each month.
+    for (let month = 1; month <= 3; month++) {
+      let monthName;
+      let daysInMonth;
+      switch (month) {
+        case 1:
+          monthName = "January";
+          break;
+        case 2:
+          monthName = "February";
+          break;
+        case 3:
+          monthName = "March";
+          break;
+        default:
+          monthName = "Unknown";
+      }
+      // Calculate the number of days in the month
+      daysInMonth = new Date(new Date().getFullYear(), month, 0).getDate();
+      // setting the day to 0 gives me the last day of the previous month
+      // .getDate() – gets the day of the month from the date object, which in this case will be the number of days in the previous month.
+      console.log(`${monthName} has ${daysInMonth} days.`);
+    }
+
+    // <!-- ----------------------------------------------- Arrays & Objects ----------------------------------------------- -->
+    // Q: Print out students names and their marks:
+    const students = { saleh: 90, osama: 80, rand: 85 };
+    const studentsNames = ["saleh", "osama", "rand"];
+
+    for (let i = 0; i <= studentsNames.length; i++) {
+      console.log(
+        `${studentsNames[i]} has a grade of: ${students[studentsNames[i]]}`,
+      );
+    }
+
+    // Q: Print out each fruit and its price:
+    fruits = { apple: 1, orange: 2, banana: 3 };
+    fruitsNames = ["apple", "orange", "banana"];
+    for (let i = 0; i < fruitsNames.length; i++) {
+      console.log(`${fruitsNames[i]} price is: ${fruits[fruitsNames[i]]}`);
+    }
+
+    // <!-- ------------------------------------------- map(), filter(), reduce() ------------------------------------------- -->
+    // Task 1: use map() to double each element
+    const task1Numbers = [1, 2, 3, 4, 5];
+    // Task 2: user filter() to get names longer than 4 letter
+    const task2Names = ["Luna", "Max", "Oliver", "Sam", "Sophia"];
+    // Task 3: use reduce() to multiply all elements
+    const task3Numbers = [1, 2, 3, 4, 5];
+    // Task 4: Use reduce() to find the maximum number (using Math.max)
+    const task4Numbers = [10, 24, 5, 78, 42, 99, 35];
+    // Task 1 Ans:
+    var result1 = task1Numbers.map((num) => num * 2);
+    // Task 2 Ans:
+    var result2 = task2Names.filter((val) => val.length > 4);
+    // Task 3 Ans:
+    var result3 = task3Numbers.reduce((acc, num) => num * acc, 1);
+    // Task 4 Ans:
+    var result4 = task4Numbers.reduce((acc, num) => Math.max(acc, num)); //starts comparing the first 2 indexes in the array
+
+    // Q: Write a code that filters products where price is greater than 10, and return total price of the items that have price greater than 10.
+    var products = [
+      { name: "Charger", price: 10 },
+      { name: "Mobile", price: 250 },
+      { name: "Mouse", price: 5 },
+      { name: "Screen", price: 150 },
+      { name: "Keyboard", price: 20 },
+      { name: "Cable", price: 1 },
+    ];
+
+    // using map, it will return an array of the total price at each index
+    products.map((product) =>
+      products
+        .filter((product) => product.price > 10)
+        .reduce((acc, product) => acc + product.price, 0),
+    );
+    //without map
+    products.filter((p) => p.price > 10).reduce((acc, p) => acc + p.price, 0);
+
+    // <!-- ------------------------------------------------- Destructuring ------------------------------------------------- -->
+    // Q: Write a function that accepts a personDetails as param, and inside this function, we need to destruct the following:-1- personName 2- phoneNum, 3- isGraduated 4- city 5- height… and inside the function we have to print each value
+    const person = {
+      personName: "ahmad",
+      phoneNum: 123,
+      isGraduated: true,
+      city: "Amman",
+      height: 170,
+    };
+    const personDetails = (person) => {
+      const { personName, phoneNum, isGraduated, city, height } = person;
+      return { personName, phoneNum, isGraduated, city, height };
+    };
+    console.log(personDetails(person)); // { personName: ‘ahmad’, phoneNum: 123, isGraduated: true, city: ‘Amman’, height: 170}
+
+    // <!-- -------------------------------------------------- setTimeOut -------------------------------------------------- -->
+    // Q: Write a function that prints anything after 10 seconds
+    function printInput(input) {
+      console.log("will print your input in 10s");
+      setTimeout(() => {
+        console.log(input);
+      }, 10000);
+    }
+    console.log(printInput("hi"));
+    for (let i = 0; i <= 3; i++) {
+      setTimeout(() => {
+        console.log(i);
+      }, 1000);
+    }
+    //prints all numbers at once, bcs the loop finishes fast so after 1s all the values are printed
+    for (let i = 0; i <= 3; i++) {
+      setTimeout(() => {
+        console.log(i);
+      }, i * 1000);
+    } // after each i second, the I will be printed out
+
+    // <!-- --------------------------------------------------- Closures --------------------------------------------------- -->
+    // Q: Write a function that prints a word using closure:
+    function outerFunction() {
+      let word = "something";
+      let count = 0;
+      function innerFunction() {
+        count++;
+        return word + count;
+      }
+      return innerFunction;
+    }
+    const smt = outerFunction();
+    smt();
+  </script>
+</html>
