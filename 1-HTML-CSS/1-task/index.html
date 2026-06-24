@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ideal Innovation Masters</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <nav class="navigation">
+      <img src="images/iih_logo.png" class="logo" alt="coffee image" />
+      <p class="title">Ideal Innovation Masters</p>
+    </nav>
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="grid-parent">
+        <div class="container" id="items">
+          <h4>ITEMS</h4>
+
+          <div class="item">
+            <p class="amount">1x</p>
+            <div class="product">
+              <p class="product-name">Cappucino</p>
+              <ul class="product-specification">
+                <li>Light Foam</li>
+              </ul>
+            </div>
+            <p class="price">$6.00</p>
+          </div>
+          <hr />
+
+          <div class="item">
+            <p class="amount">1x</p>
+            <div class="product">
+              <p class="product-name">Cappucino</p>
+              <ul class="product-specification">
+                <li>Almond Milk</li>
+                <li>Double Espresso Shot</li>
+              </ul>
+            </div>
+            <p class="price">$7.90</p>
+          </div>
+
+          <hr />
+          <div class="item">
+            <p class="amount">1x</p>
+            <div class="product">
+              <p class="product-name">Croissant</p>
+              <ul class="product-specification">
+                <li>Butter</li>
+              </ul>
+            </div>
+            <p class="price">$3.37</p>
+          </div>
+        </div>
+
+        <div class="container" id="name">
+          <h4>NAME</h4>
+
+          <form id="order-name">
+            <div class="form-group">
+              <label>Name for order</label>
+              <input type="text" title="name_for_order" class="input" />
+            </div>
+          </form>
+        </div>
+
+        <div class="container" id="payment">
+          <h4>PAYMENT</h4>
+
+          <form id="payment">
+            <div class="form-group">
+              <label>Card Number</label>
+              <input type="text" title="card_number" class="input" />
+            </div>
+
+            <div class="form-group">
+              <label>CCV number</label>
+              <input type="text" title="ccv_number" class="input CCV" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="prices">
+        <p>Subtotal:</p>
+        <p>$19.27</p>
+
+        <p>Tax:</p>
+        <p>$0.96</p>
+
+        <p>Subtotal:</p>
+        <p>$ 20.23</p>
+      </div>
+
+      <button type="button" class="place-order">Place Order</button>
+    </div>
+  </body>
+</html>
