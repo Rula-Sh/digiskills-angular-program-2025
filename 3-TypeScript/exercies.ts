@@ -89,3 +89,123 @@ function getUserFullName(firstName: string, lastName: string, middleName?: strin
 }
 // A required parameter cannot follow an optional, thats why we placed the middleName the last.
 // .filter(Boolean) removes any falsy values (undefined, null, "", false, 0, NaN).
+
+
+// <!-- =========================================================================================================== -->
+// <!-- ======================================= Objects, Arrays and Tuples ======================================== -->
+// <!-- =========================================================================================================== -->
+
+/* Q: Build a function called getGradeIfItsGreaterThan80 this function should take array of students object, each 
+      object should have a name and a grade, this function should return an array of students names who got a 
+      grade greater than 80 */
+
+function getGradeIfItsGreaterThan80_1(input: { name: string; grade: number }[]): string[] {
+  var result: string[] = [];
+  input.forEach((student) => {
+    if (student.grade > 80) {
+      result.push(student.name);
+    }
+  });
+  return result;
+  // OR
+  for (var i: number = 0; i < input.length; i++) {
+    if (input[i].grade > 80) result.push(input[i].name);
+  }
+  // OR
+  for (var std in input) {
+    if (input[std].grade > 80) result.push(input[std].name);
+  }
+}
+
+// (Better Approach using Type Alias)
+type Student_1 = {
+  name: string;
+  grade: number;
+  id?: number;
+  location?: string;
+};
+
+function getGradeIfItsGreaterThan80_2(students: Student_1[]): string[] {
+  // or  (students: { name: string; grade: number }[]) but its not the best approach, bcs i will need to modify it everywhere it is used when the object properties change... like adding later id: number;
+  return students
+    .filter((students) => students.grade > 80)
+    .map((students) => students.name);
+}
+
+const students = [
+  { name: "std1", grade: 55 },
+  { name: "std2", grade: 76 },
+  { name: "std3", grade: 89 },
+  { name: "std4", grade: 99 },
+];
+
+console.log(getGradeIfItsGreaterThan80_2(students));
+
+
+/* Q: Write a function called printStudentGrades, this function should take an array of students objects, each 
+      object should have a name and a grade, the function should print the student name and his grade, if the 
+      student grade is less than 80, print "failed" */
+
+// type Student = {    name: string;    grade: number;    }; // commented bcs its already created
+
+function printStudentGrades1(students: Student_1[]): void {
+  students.forEach((student) => {
+    console.log(
+      `${student.name} has grade of ${student.grade} => ${
+        student.grade < 80 ? "Failed" : "Passed"
+      }`,
+    );
+  });
+}
+
+function printStudentGrades2(students: Student_1[]): void {
+  for (let student of students) {
+    // (let student in students) is for objects not arrays
+    console.log(
+      student.grade > 80
+        ? `${student.name} passed with grade a of ${student.grade}`
+        : `${student.name} failed`,
+    );
+  }
+}
+
+function printStudentGrades3(student: Student_1[]): string[] {
+  return student.map(
+    (student) =>
+      `${student.name} grade is ${student.grade} => ${
+        student.grade > 80 ? "Passed" : "Failed"
+      }`,
+  );
+}
+
+function printStudentGrades4(student: Student_1[]): string[] {
+  var res = "Failed";
+  return student
+    .filter((student) =>
+      student.grade > 80 ? (res = "Passed") : (res = "Failed"),
+    )
+    .map((student) => `${student.name} grade is ${student.grade} ${res}`);
+}
+
+
+/* Q: Write a function called getStudentsInfo, it takes an array of students objects and returns an array of tuples, 
+      each tuple contains: studentId (number) / studentName(string) / studentIsGraduated(boolean). and
+      each student object contains: id:number / name:string / major: string / isGraduated: boolean 
+      Bonus: Get only graduated students info */
+
+type Student_2 = {
+  id: number;
+  name: string;
+  major: string;
+  isGraduate: boolean;
+};
+
+function getStudentsInfo(students: Student_2[]): [number, string, boolean][] {
+  return students.map(({ id, name, isGraduate }) => [id, name, isGraduate]);
+}
+
+function getGraduatedStudentsInfo(students: Student_2[]): [number, string, boolean][] {
+  return students
+    .filter((student) => student.isGraduate)
+    .map(({ id, name, isGraduate }) => [id, name, isGraduate]);
+}
