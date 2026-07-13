@@ -209,3 +209,48 @@ function getGraduatedStudentsInfo(students: Student_2[]): [number, string, boole
     .filter((student) => student.isGraduate)
     .map(({ id, name, isGraduate }) => [id, name, isGraduate]);
 }
+
+
+// <!-- =========================================================================================================== -->
+// <!-- ====================================== Type Alias & Index Signature ======================================= -->
+// <!-- =========================================================================================================== -->
+
+/* Q: Write a TypeScript type called "UserSettings", this type allows dynamic keys where:
+        1- Each key is a string (representing the setting name).
+        2- Each value is either a string or Boolean (representing the setting value).
+      Then create an object called "setting" using this type and add the following properties: 
+      "theme"-> "light" / "hasNotifications"-> true / "isAutoSave"-> false….
+      Bonus: Write a function "getSettingValue" that takes "settings" and a key as arguments and returns the 
+             corresponding value. */
+
+type UserSettings = {
+  [key: string]: string | boolean;
+};
+
+const settings: UserSettings = {
+  theme: "light",
+  hasNotification: true,
+  isAutoSave: false,
+};
+// I can name the key 1 or true… bcs the compiler will consider the key as string
+
+function getSettingsValue(setting: UserSettings, key: string): string | boolean {
+  return setting[key]; // returns the keys values
+}
+
+console.log(getSettingsValue(settings, "theme")); // returns light
+console.log(getSettingsValue(settings, "unknownKey")); // returns undefined
+
+
+// <!-- =========================================================================================================== -->
+// <!-- =========================================== Intersection Types ============================================ -->
+// <!-- =========================================================================================================== -->
+
+/* Q: Define an intersection type StudentAthlete that combines Student and Athlete. 
+      The object must have name, grade, sport, and team properties. */
+
+type Student_3 = { name: string; grade: number };
+type Athlete = { sport: string; team: string };
+
+type StudentAthlete = Student_3 & Athlete; // & (Intersection) requires ALL properties from BOTH types, extra properties are NOT allowed
+type StudentOrAthlete = Student_3 | Athlete; // | (Union) Must match AT LEAST ONE type completely, it Can have extra properties, BUT only if they belong to the OTHER type in the union
