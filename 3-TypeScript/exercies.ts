@@ -254,3 +254,79 @@ type Athlete = { sport: string; team: string };
 
 type StudentAthlete = Student_3 & Athlete; // & (Intersection) requires ALL properties from BOTH types, extra properties are NOT allowed
 type StudentOrAthlete = Student_3 | Athlete; // | (Union) Must match AT LEAST ONE type completely, it Can have extra properties, BUT only if they belong to the OTHER type in the union
+
+
+// <!-- =========================================================================================================== -->
+// <!-- =============================================== Interfaces ================================================ -->
+// <!-- =========================================================================================================== -->
+
+/* Q: Create a Product interface that has id (number)/ name (string)/ price (number)/ An optional discount (number).
+      Then create object Item that follows this interface.
+      Bonus: Modify the solution by adding getProductDetails function, 
+             which takes a Product object and returns a formatted string. */
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  discount?: number;
+}
+
+let item1: Product = {
+  id: 1,
+  name: "ChocoRush",
+  price: 1.49,
+};
+
+function getProductDetails(product: Product): string {
+  return product.discount
+    ? `${product.name} has a price $${product.price} with ${product.discount}% discount.`
+    : `${product.name} has a price $${product.price} (there is no discount available).`;
+}
+
+
+// <!-- =========================================================================================================== -->
+// <!-- ================================================ Generics ================================================= -->
+// <!-- =========================================================================================================== -->
+
+/* Q: Create a generic function "wrapInArray" that takes a single value and returns it as an array of same type. */
+
+function wrapInArray<T>(value: T): T[] {
+  return [value];
+}
+
+
+/* Q: Create a generic function called pair that takes two values of different types and returns them as a tuple [FirstType, SecondType]. */
+
+function pair<Val1, Val2>(val1: Val1, val2: Val2): [Val1, Val2] {
+  return [val1, val2];
+}
+
+// <!-- =========================================================================================================== -->
+// <!-- ============================================== Utility Types ============================================== -->
+// <!-- =========================================================================================================== -->
+
+/* Q: 1- Define a type NotPendingStatus that includes "approved" and "rejected", but excludes "pending".
+      2- Create a type called UserWithoutEmail that includes everything from User except email.
+      3- Create a type called UserBasicInfo that only includes id and name from User.
+      4- Define a constant object settings that cannot be modified after initialization. */
+
+// Q1:
+type status = "approved" | "rejected" | "pending";
+type NotPendingStatus = Exclude<status, "pending">;
+// Q2:
+interface User {
+  id: number;
+  username: string;
+  email: string;
+}
+type UserWithoutEmail = Omit<User, "email">;
+// Q3:
+type UserBasicInfo = Pick<User, "id" | "username">;
+// Q4:
+type Settings = { brightness: number; volume: number; language: string };
+const userSettings: Readonly<Settings> = {
+  brightness: 55,
+  volume: 87,
+  language: "English",
+};
